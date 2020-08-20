@@ -1,11 +1,30 @@
 class HanoiGame {
-  constructor(towers = [[3,2,1], [], []]) {
-    this.towers = towers
+  constructor(towers = [[3, 2, 1], [], []]) {
+    this.towers = towers;
   }
 
   isValidMove(startTowerIdx, endTowerIdx) {
-    if (endTowerIdx.length === undefined) {
-      return true
+    /*
+    true -> endTowerIdx is empty tower
+
+    false -> start tower and end tower are the same tower
+          -> startTowerIdx is empty tower
+          -> first argument indicates empty tower
+          -> second argument indicates a tower that doesn't exist
+          -> first argument indicates a tower that doesn't exist
+    */
+
+    const startTower = this.towers[startTowerIdx];
+    const endTower = this.towers[endTowerIdx];
+    if (endTower === undefined || startTower === endTower) {
+      //endTower exists and is not the same as startTower
+      return false;
+    } else if (endTower.length === 0) {
+      return true;
+    } else if (startTower.length === 0) {
+      return false;
+    } else {
+      return false;
     }
   }
 
@@ -21,9 +40,9 @@ class HanoiGame {
 
   promptMove(reader, callback) {
     this.print();
-    reader.question("Enter a starting tower: ", start => {
+    reader.question("Enter a starting tower: ", (start) => {
       const startTowerIdx = parseInt(start);
-      reader.question("Enter an ending tower: ", end => {
+      reader.question("Enter an ending tower: ", (end) => {
         const endTowerIdx = parseInt(end);
         callback(startTowerIdx, endTowerIdx);
       });
