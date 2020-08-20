@@ -16,15 +16,22 @@ class HanoiGame {
 
     const startTower = this.towers[startTowerIdx];
     const endTower = this.towers[endTowerIdx];
-    if (endTower === undefined || startTower === endTower) {
+    console.log(this.towers)
+    console.log(startTower);
+    console.log(endTower);
+    console.log(startTower[startTower.length - 1]);
+    console.log(lastTower[lastTower.length - 1]);
+
+
+    if (endTower === undefined || startTower === undefined || startTower.length === 0) {
       //endTower exists and is not the same as startTower
+      return false;
+    } else if (startTower === endTower) {
       return false;
     } else if (endTower.length === 0) {
       return true;
-    } else if (startTower.length === 0) {
-      return false;
     } else {
-      return false;
+      return (startTower[startTower.length - 1] < lastTower[lastTower.length - 1]);
     }
   }
 
@@ -70,4 +77,6 @@ class HanoiGame {
   }
 }
 
+let newGame = new HanoiGame();
+newGame.isValidMove(0,1);
 module.exports = HanoiGame;
