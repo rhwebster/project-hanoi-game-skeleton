@@ -16,14 +16,17 @@ class HanoiGame {
 
     const startTower = this.towers[startTowerIdx];
     const endTower = this.towers[endTowerIdx];
-    console.log(this.towers)
-    console.log(startTower);
-    console.log(endTower);
-    console.log(startTower[startTower.length - 1]);
-    console.log(lastTower[lastTower.length - 1]);
+    // console.log(this.towers)
+    // console.log(startTower);
+    // console.log(endTower);
+    // console.log(startTower[startTower.length - 1]);
+    // console.log(lastTower[lastTower.length - 1]);
 
-
-    if (endTower === undefined || startTower === undefined || startTower.length === 0) {
+    if (
+      endTower === undefined ||
+      startTower === undefined ||
+      startTower.length === 0
+    ) {
       //endTower exists and is not the same as startTower
       return false;
     } else if (startTower === endTower) {
@@ -31,13 +34,28 @@ class HanoiGame {
     } else if (endTower.length === 0) {
       return true;
     } else {
-      return (startTower[startTower.length - 1] < lastTower[lastTower.length - 1]);
+      return startTower[startTower.length - 1] < endTower[endTower.length - 1];
     }
   }
 
-  move(startTowerIdx, endTowerIdx) {}
+  move(startTowerIdx, endTowerIdx) {
+    const startTower = this.towers[startTowerIdx];
+    const endTower = this.towers[endTowerIdx];
+    if (this.isValidMove(startTowerIdx, endTowerIdx)) {
+      endTower.push(startTower.pop());
+      return true;
+    } else {
+      return false;
+    }
+  }
 
-  isWon() {}
+  isWon() {
+    if (this.towers[1].length === 3 || this.towers[2].length === 3) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   // the below methods are complete and do not need to be modified
   print() {
@@ -77,6 +95,4 @@ class HanoiGame {
   }
 }
 
-let newGame = new HanoiGame();
-newGame.isValidMove(0,1);
 module.exports = HanoiGame;
